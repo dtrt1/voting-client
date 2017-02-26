@@ -1,19 +1,24 @@
 /**
  * Created by DTRT on 26.02.2017.
  */
+var webpack = require('webpack');
+
 module.exports = {
     entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
         './src/index.js'
     ],
     module: {
         loaders: [{
             test: /\.jsx?$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'react-hot!babel',
+            include: __dirname + '/src'
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['*', '.js', '.jsx']
     },
     output: {
         path: __dirname + '/dist',
@@ -21,6 +26,10 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: './dist'
-    }
+        contentBase: './dist',
+        hot: true
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };
