@@ -3,17 +3,17 @@
  */
 import React from 'react';
 
-export default React.createClass({
-    getPair: function() {
+export default class extends React.PureComponent {
+    getPair() {
         return this.props.pair || [];
-    },
-    isDisabled: function() {
+    }
+    isDisabled() {
         return !!this.props.hasVoted;
-    },
-    hasVotedFor: function(entry) {
+    }
+    hasVotedFor(entry) {
         return this.props.hasVoted === entry;
-    },
-    render: function() {
+    }
+    render() {
         return <div className="voting">
             {this.getPair().map(entry =>
                 <button key={entry}
@@ -27,4 +27,4 @@ export default React.createClass({
             )}
         </div>;
     }
-});
+}
